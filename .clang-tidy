@@ -1,0 +1,59 @@
+# Clang-Tidy configuration for C++23 project using LLVM 19
+# Documentation: https://clang.llvm.org/extra/clang-tidy/
+
+Checks: >
+  -clang-analyzer-*,
+  -llvm-*,
+  -fuchsia-*,
+  -llvmlibc-*,
+  -google-build-using-namespace,
+  -readability-identifier-naming,
+  -modernize-use-trailing-return-type,
+  bugprone-*,
+  clang-analyzer-core*,
+  clang-analyzer-deadcode*,
+  clang-analyzer-cplusplus*,
+  performance-*,
+  readability-*,
+  modernize-*,
+  cppcoreguidelines-*,
+  portability-*,
+  hicpp-*,
+  misc-*,
+  google-*,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -readability-magic-numbers,
+  -readability-implicit-bool-conversion,
+  -readability-uppercase-literal-suffix,
+  -hicpp-uppercase-literal-suffix
+
+# Treat warnings as errors when running clang-tidy (local builds can override)
+WarningsAsErrors: ''
+
+# Use compile_commands.json from the project root (symlinked by build.sh)
+CompileCommandsDir: .
+
+HeaderFilterRegex: '.*'
+
+CheckOptions:
+  # Encourage explicit constructors to avoid unintended implicit conversions
+  - key: cppcoreguidelines-explicit-virtual-functions.IgnoreDestructors
+    value: 'true'
+  - key: modernize-use-nullptr.NullMacros
+    value: 'NULL,nullptr_t'
+  - key: readability-identifier-naming.VariableCase
+    value: 'lower_case'
+  - key: readability-identifier-naming.PrivateMemberSuffix
+    value: '_'
+  - key: readability-identifier-naming.StructMemberCase
+    value: 'lower_case'
+  - key: readability-identifier-naming.ClassMemberCase
+    value: 'lower_case'
+  - key: readability-identifier-naming.ParameterCase
+    value: 'lower_case'
+  - key: readability-identifier-naming.FunctionCase
+    value: 'lower_case'
+  - key: modernize-use-auto.MinTypeNameLength
+    value: '8'
+  - key: modernize-use-override.IgnoreDestructors
+    value: 'true'

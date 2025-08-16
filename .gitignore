@@ -1,0 +1,39 @@
+# Build artifacts
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+CTestTestfile.cmake
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+
+# Compiled objects
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.exe
+*.out
+*.app
+
+# Generated files
+*.pch
+*.pdb
+*.mod
+*.gcda
+*.gcno
+*.gcov
+
+# Editor/OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Keep VSCode/Cursor configs in version control
+!.vscode/

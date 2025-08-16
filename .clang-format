@@ -1,0 +1,46 @@
+# Base style derived from Google C++ style guide
+BasedOnStyle: Google
+
+# Use C++23 language features where relevant (affects some formatting decisions)
+Standard: Cpp23
+
+# Column limit for line wrapping. Google defaults to 80; adjust if needed.
+ColumnLimit: 100
+
+# Indentation width in spaces
+IndentWidth: 2
+
+# Continuation indentation for wrapped lines
+ContinuationIndentWidth: 4
+
+# Align consecutive assignments for readability
+AlignConsecutiveAssignments: Consecutive
+
+# Align parameters in function declarations/definitions when they wrap
+AlignAfterOpenBracket: Align
+
+# Break before braces for functions, classes, namespaces (Google uses Attach for others)
+BreakBeforeBraces: Google
+
+# Keep include order and grouping stable
+SortIncludes: true
+IncludeBlocks: Regroup
+
+# Always use braces for control statements for safety
+AllowShortIfStatementsOnASingleLine: Never
+
+# Pointer and reference alignment next to the type (Google style)
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+# Place 'else if' on the same line as 'else'
+BreakBeforeElse: false
+
+# Namespace indentation control (do not indent inside namespaces)
+NamespaceIndentation: None
+
+# Keep function definitions on one line only if very short
+AllowShortFunctionsOnASingleLine: Empty
+
+# Enforce trailing commas in multiline container literals to reduce diffs
+Cpp11BracedListStyle: true
