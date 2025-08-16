@@ -1,0 +1,1 @@
+/usr/bin/c++ -Xlinker --dependency-file=CMakeFiles/demo_cpp20.dir/link.d CMakeFiles/demo_cpp20.dir/src/demo_cpp20.cpp.o -o demo_cpp20
