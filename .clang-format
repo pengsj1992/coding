@@ -1,0 +1,138 @@
+# Google C/C++ Code Style settings for C++23
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+# 基于Google风格指南，适配C++23标准
+# 该配置文件遵循Google C++ Style Guide，并针对C++23特性进行了优化
+# 适用于 clang-format 19 版本
+
+# 语言设置
+Language: Cpp                    # 指定语言为C++
+BasedOnStyle: Google             # 基于Google风格指南
+
+# 访问修饰符缩进
+AccessModifierOffset: -1         # 访问修饰符(public/private/protected)的缩进偏移量，-1表示减少1个空格
+
+# 对齐设置
+AlignAfterOpenBracket: Align     # 在开括号后对齐，可选值: Align, DontAlign, BlockIndent
+AlignConsecutiveAssignments: None # 连续赋值语句的对齐，可选值: None, Consecutive, AcrossEmptyLines, AcrossComments
+AlignConsecutiveDeclarations: None # 连续声明语句的对齐，可选值: None, Consecutive, AcrossEmptyLines, AcrossComments
+AlignConsecutiveMacros: None     # 连续宏定义的对齐，可选值: None, Consecutive, AcrossEmptyLines, AcrossComments
+AlignConsecutiveShortCaseStatements: false # 连续短case语句的对齐，可选值: true, false
+AlignOperands: Align             # 操作数对齐，可选值: Align, DontAlign
+
+# 参数和初始化器换行设置
+AllowAllArgumentsOnNextLine: true # 允许所有函数参数在下一行，可选值: true, false
+AllowAllConstructorInitializersOnNextLine: true # 允许所有构造函数初始化器在下一行，可选值: true, false
+AllowAllParametersOfDeclarationOnNextLine: false # 允许声明中的所有参数在下一行，可选值: true, false
+
+# 短语句单行设置
+AllowShortBlocksOnASingleLine: Empty # 允许短代码块在单行，可选值: false, Empty, Simple
+AllowShortCaseLabelsOnASingleLine: false # 允许短case标签在单行，可选值: true, false
+AllowShortFunctionsOnASingleLine: Inline # 允许短函数在单行，可选值: None, Inline, Empty, All
+AllowShortIfStatementsOnASingleLine: Never # 允许短if语句在单行，可选值: Never, WithoutElse, OnlyFirstIf, AllIfs
+AllowShortLambdasOnASingleLine: Inline # 允许短lambda在单行，可选值: None, Inline, Empty, All
+AllowShortLoopsOnASingleLine: false # 允许短循环在单行，可选值: true, false
+
+# 函数和模板声明换行
+AlwaysBreakAfterReturnType: None # 返回类型后总是换行，可选值: None, All, TopLevel, AllDefinitions
+AlwaysBreakTemplateDeclarations: Yes # 模板声明总是换行，可选值: No, MultiLine, Yes
+
+# 参数打包
+BinPackArguments: true           # 打包函数参数，可选值: true, false
+
+# 大括号换行设置
+BreakBeforeBraces: Custom        # 大括号前的换行，可选值: Attach, Linux, Mozilla, Stroustrup, Allman, Whitesmiths, Custom
+BraceWrapping:
+  AfterCaseLabel: false          # case标签后换行，可选值: true, false
+  AfterClass: false              # 类定义后换行，可选值: true, false
+  AfterStruct: false             # 结构体定义后换行，可选值: true, false
+  AfterControlStatement: Never   # 控制语句后换行，可选值: Never, MultiLine, Always
+  AfterEnum: false               # 枚举定义后换行，可选值: true, false
+  AfterFunction: false           # 函数定义后换行，可选值: true, false
+  AfterNamespace: false          # 命名空间后换行，可选值: true, false
+  AfterUnion: false              # 联合体定义后换行，可选值: true, false
+  AfterExternBlock: false        # extern块后换行，可选值: true, false
+  BeforeCatch: false             # catch前换行，可选值: true, false
+  BeforeElse: false              # else前换行，可选值: true, false
+  BeforeLambdaBody: false        # lambda体前换行，可选值: true, false
+  IndentBraces: false            # 缩进大括号，可选值: true, false
+  SplitEmptyFunction: false      # 分割空函数，可选值: true, false
+  SplitEmptyRecord: false        # 分割空记录，可选值: true, false
+  SplitEmptyNamespace: false     # 分割空命名空间，可选值: true, false
+
+# 操作符换行设置
+BreakBeforeBinaryOperators: None # 二元操作符前换行，可选值: None, NonAssignment, All
+BreakBeforeTernaryOperators: true # 三元操作符前换行，可选值: true, false
+
+# 构造函数和继承列表换行
+BreakConstructorInitializers: BeforeColon # 构造函数初始化器换行，可选值: BeforeColon, BeforeComma, AfterColon
+BreakInheritanceList: BeforeColon # 继承列表换行，可选值: BeforeColon, BeforeComma, AfterColon
+
+# 行宽和缩进设置
+ColumnLimit: 120                 # 最大行宽，Google风格推荐80，但现代显示器支持更宽
+CompactNamespaces: false         # 紧凑命名空间，可选值: true, false
+ContinuationIndentWidth: 4       # 续行缩进宽度
+IndentWidth: 4                   # 基本缩进宽度
+
+# C++11特性设置
+Cpp11BracedListStyle: true       # 使用C++11大括号列表样式，可选值: true, false
+
+# 指针对齐设置
+DerivePointerAlignment: false    # 从变量名推导指针对齐，可选值: true, false
+PointerAlignment: Left           # 指针对齐方式，可选值: Left, Right, Middle
+
+# 空行设置
+EmptyLineBeforeAccessModifier: LogicalBlock # 访问修饰符前的空行，可选值: Never, Leave, LogicalBlock, Always
+KeepEmptyLinesAtTheStartOfBlocks: true # 保持块开始处的空行，可选值: true, false
+MaxEmptyLinesToKeep: 1           # 保持的最大空行数
+
+# 命名空间设置
+NamespaceIndentation: None       # 命名空间缩进，可选值: None, Inner, All
+FixNamespaceComments: true       # 修复命名空间注释，可选值: true, false
+
+# 包含文件设置
+IncludeBlocks: Preserve          # 包含块处理，可选值: Preserve, Merge, Regroup
+
+# 预处理指令设置
+IndentCaseLabels: true           # 缩进case标签，可选值: true, false
+IndentPPDirectives: None         # 预处理指令缩进，可选值: None, AfterHash, BeforeHash
+
+# 注释设置
+ReflowComments: false            # 重新格式化注释，可选值: true, false
+SpacesBeforeTrailingComments: 2  # 尾随注释前的空格数
+
+# 空格设置
+SpaceAfterCStyleCast: false      # C风格转换后的空格，可选值: true, false
+SpaceAfterLogicalNot: false      # 逻辑非操作符后的空格，可选值: true, false
+SpaceAfterTemplateKeyword: true  # template关键字后的空格，可选值: true, false
+SpaceBeforeAssignmentOperators: true # 赋值操作符前的空格，可选值: true, false
+SpaceBeforeCpp11BracedList: false # C++11大括号列表前的空格，可选值: true, false
+SpaceBeforeCtorInitializerColon: true # 构造函数初始化器冒号前的空格，可选值: true, false
+SpaceBeforeInheritanceColon: true # 继承冒号前的空格，可选值: true, false
+SpaceBeforeParens: ControlStatements # 括号前的空格，可选值: Never, ControlStatements, Always
+SpaceBeforeRangeBasedForLoopColon: true # 基于范围的for循环冒号前的空格，可选值: true, false
+SpaceBeforeSquareBrackets: false # 方括号前的空格，可选值: true, false
+SpaceInEmptyParentheses: false   # 空括号内的空格，可选值: true, false
+SpacesInAngles: false            # 尖括号内的空格，可选值: true, false
+SpacesInCStyleCastParentheses: false # C风格转换括号内的空格，可选值: true, false
+SpacesInContainerLiterals: false # 容器字面量内的空格，可选值: true, false
+SpacesInParentheses: false       # 括号内的空格，可选值: true, false
+SpacesInSquareBrackets: false    # 方括号内的空格，可选值: true, false
+
+# C++标准设置
+Standard: Latest                  # C++标准版本，可选值: Latest, c++03, c++11, c++14, c++17, c++20, c++23
+
+# 制表符设置
+TabWidth: 4                      # 制表符宽度
+UseTab: Never                    # 使用制表符，可选值: Never, ForIndentation, ForContinuationAndIndentation, AlignWithSpaces, ForIndentation
+
+# clang-format 19 新增配置项
+SeparateDefinitionBlocks: Always # 分离定义块，可选值: Never, Always
+AlignConsecutiveBitFields: false # 连续位域的对齐，可选值: true, false
+AlignConsecutiveRequiresClauses: false # 连续requires子句的对齐，可选值: true, false
+AlignConsecutiveUsingDeclarations: false # 连续using声明的对齐，可选值: true, false
+AlignEscapedNewlines: Left       # 转义换行符的对齐，可选值: Left, Right, DontAlign
+AlignTrailingComments: true      # 尾随注释的对齐，可选值: true, false
+AllowBreakBeforeNoexceptSpecifier: false # 允许在noexcept说明符前换行，可选值: true, false
+AlwaysBreakAfterDefinitionReturnType: None # 定义返回类型后总是换行，可选值: None, All, TopLevel
+AlwaysBreakBeforeMultilineStrings: true # 多行字符串前总是换行，可选值: true, false
+AlwaysBreakTemplateDeclarations: Yes # 模板声明总是换行，可选值: No, MultiLine, Yes

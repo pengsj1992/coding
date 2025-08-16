@@ -1,0 +1,20 @@
+{
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+	"clangd.path": "clangd",
+	"clangd.arguments": [
+		"--header-insertion=never",
+		"--compile-commands-dir=${workspaceFolder}",
+		"--cross-file-rename=true",
+		"--background-index"
+	],
+	"C_Cpp.intelliSenseEngine": "disabled",
+	"cmake.buildDirectory": "${workspaceFolder}/build",
+	"cmake.configureOnOpen": false,
+	"cmake.sourceDirectory": "${workspaceFolder}",
+	"cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
+	"files.associations": {
+		"*.tpp": "cpp",
+		"*.ipp": "cpp"
+	}
+}

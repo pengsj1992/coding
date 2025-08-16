@@ -1,0 +1,91 @@
+# Clang-Tidy configuration for C++23 project using LLVM 19
+# Clang-Tidy C++23项目配置文件，基于LLVM 19
+# Documentation: https://clang.llvm.org/extra/clang-tidy/
+
+Checks: >
+  # 禁用不相关的检查类别
+  -clang-analyzer-*,
+  -llvm-*,
+  -fuchsia-*,
+  -llvmlibc-*,
+  -google-build-using-namespace,
+  -readability-identifier-naming,
+  -modernize-use-trailing-return-type,
+  # 启用核心检查类别
+  bugprone-*,                    # 错误预防检查
+  clang-analyzer-core*,          # 核心静态分析
+  clang-analyzer-deadcode*,      # 死代码检测
+  clang-analyzer-cplusplus*,     # C++特定分析
+  performance-*,                 # 性能优化建议
+  readability-*,                 # 代码可读性改进
+  modernize-*,                   # 现代化C++特性使用
+  cppcoreguidelines-*,           # C++核心指南检查
+  portability-*,                 # 可移植性检查
+  hicpp-*,                       # High Integrity C++检查
+  misc-*,                        # 其他杂项检查
+  google-*,                      # Google C++风格检查
+  # 禁用特定的检查项
+  -cppcoreguidelines-avoid-magic-numbers,    # 允许魔法数字
+  -readability-magic-numbers,                # 允许魔法数字
+  -readability-implicit-bool-conversion,     # 允许隐式布尔转换
+  -readability-uppercase-literal-suffix,     # 允许小写字面量后缀
+  -hicpp-uppercase-literal-suffix           # 允许小写字面量后缀
+
+# 将警告视为错误（本地构建可以覆盖此设置）
+WarningsAsErrors: ''
+
+# 使用项目根目录的compile_commands.json（由build.sh符号链接）
+CompileCommandsDir: .
+
+# 头文件过滤正则表达式
+HeaderFilterRegex: '.*'
+
+CheckOptions:
+  # 鼓励显式构造函数以避免意外的隐式转换
+  - key: cppcoreguidelines-explicit-virtual-functions.IgnoreDestructors
+    value: 'true'
+  # 设置nullptr宏
+  - key: modernize-use-nullptr.NullMacros
+    value: 'NULL,nullptr_t'
+  # 变量命名规范：下划线命名法
+  - key: readability-identifier-naming.VariableCase
+    value: 'lower_case'
+  # 私有成员后缀
+  - key: readability-identifier-naming.PrivateMemberSuffix
+    value: '_'
+  # 结构体成员命名规范
+  - key: readability-identifier-naming.StructMemberCase
+    value: 'lower_case'
+  # 类成员命名规范
+  - key: readability-identifier-naming.ClassMemberCase
+    value: 'lower_case'
+  # 参数命名规范
+  - key: readability-identifier-naming.ParameterCase
+    value: 'lower_case'
+  # 函数命名规范
+  - key: readability-identifier-naming.FunctionCase
+    value: 'lower_case'
+  # auto使用的最小类型名长度
+  - key: modernize-use-auto.MinTypeNameLength
+    value: '8'
+  # 忽略析构函数的override检查
+  - key: modernize-use-override.IgnoreDestructors
+    value: 'true'
+  # C++23标准支持
+  - key: SimplifyBooleanExpr.UseCXX23Standard
+    value: 'true'
+  # 检测新的auto风格
+  - key: modernize-use-auto.DetectNewStyle
+    value: 'true'
+  # 循环转换的最大复制大小
+  - key: modernize-loop-convert.MaxCopySize
+    value: '16'
+  # 标识符最小长度
+  - key: readability-identifier-length.MinLength
+    value: '3'
+  # 忽略所有数字的魔法数字检查
+  - key: cppcoreguidelines-avoid-magic-numbers.IgnoreAllNumbers
+    value: 'true'
+  # 忽略裸联合类型的成员初始化检查
+  - key: cppcoreguidelines-pro-type-member-init.IgnoredNakedUnionTypes
+    value: 'std::tuple;std::pair'

@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build: Debug",
+			"type": "shell",
+			"command": "${workspaceFolder}/build.sh --debug",
+			"group": { "kind": "build", "isDefault": true },
+			"problemMatcher": ["$gcc"],
+			"options": { "cwd": "${workspaceFolder}" }
+		},
+		{
+			"label": "Build: Release",
+			"type": "shell",
+			"command": "${workspaceFolder}/build.sh --release",
+			"group": "build",
+			"problemMatcher": ["$gcc"],
+			"options": { "cwd": "${workspaceFolder}" }
+		},
+		{
+			"label": "Format: clang-format (all)",
+			"type": "shell",
+			"command": "bash -lc 'shopt -s globstar nullglob; clang-format -i **/*.{h,hpp,hh,hxx,c,cc,cpp,cxx,tpp,ipp}'",
+			"problemMatcher": []
+		}
+	]
+}

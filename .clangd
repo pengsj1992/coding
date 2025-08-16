@@ -1,0 +1,16 @@
+# clangd configuration: https://clangd.llvm.org/config
+# clangd配置文件：C++语言服务器配置
+
+# 注意：编译选项（如-Wall、-Wextra等）已由CMake在compile_commands.json中配置
+# 无需在此重复配置，clangd会自动读取compile_commands.json中的设置
+
+# 使用通过build.sh生成的顶级compile_commands.json
+CompileCommands:
+  Path: build/compile_commands.json
+
+# 后台索引改善大型项目的导航性能
+Index:
+  Background: Build
+
+# 注意：clang-tidy配置由项目根目录的.clang-tidy文件管理
+# clangd会自动读取并使用该配置文件，无需在此重复配置
