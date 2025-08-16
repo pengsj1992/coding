@@ -1,0 +1,23 @@
+# clangd configuration: https://clangd.llvm.org/config
+CompileFlags:
+  Add:
+    # Treat warnings and color diagnostics in-editor
+    - "-fcolor-diagnostics"
+    - "-Wall"
+    - "-Wextra"
+    - "-Wpedantic"
+
+# Use the top-level compile_commands.json generated via build.sh
+CompileCommands:
+  Path: compile_commands.json
+
+# Background index improves navigation for larger projects
+Index:
+  Background: Build
+
+# Enable clang-tidy integration in clangd using project .clang-tidy
+Diagnostics:
+  ClangTidy:
+    Add:
+      - "*"
+  Suppress: []
