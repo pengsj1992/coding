@@ -1,0 +1,1 @@
+/usr/bin/g++  -fcoroutines -Wall -Wextra -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/cpp23_demo.dir/link.d CMakeFiles/cpp23_demo.dir/cpp23_features.cpp.o -o cpp23_demo

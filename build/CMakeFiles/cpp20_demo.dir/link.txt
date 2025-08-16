@@ -1,0 +1,1 @@
+/usr/bin/g++  -fcoroutines -Wall -Wextra -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/cpp20_demo.dir/link.d CMakeFiles/cpp20_demo.dir/cpp20_features.cpp.o -o cpp20_demo
