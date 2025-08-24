@@ -1,85 +1,51 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.28)
 
-project(starter LANGUAGES CXX VERSION 0.1.0)
 
-# Generate compile_commands.json for clangd/clang-tidy tooling
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Build position independent (useful for shared libs, sanitizers, etc.)
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+#设置采用llvm编译工具链
+set(CMAKE_C_COMPILER /usr/bin/clang)
+set(CMAKE_CXX_COMPILER /usr/bin/clang++)
 
-# Option to escalate warnings to errors during CI or local strict builds
-option(ENABLE_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
-
-# Use ccache when available to speed up incremental builds
-find_program(CCACHE_PROGRAM ccache)
-if(CCACHE_PROGRAM)
-    set(CMAKE_C_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
-    set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
+if (NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
 endif()
 
-# Centralized warnings target to apply to all targets
-add_library(project_warnings INTERFACE)
+project(simx LANGUAGES CXX)
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    target_compile_options(project_warnings INTERFACE
-        -Wall
-        -Wextra
-        -Wpedantic
-        -Wconversion
-        -Wshadow
-        -Wdouble-promotion
-        -Woverloaded-virtual
-        -Wnon-virtual-dtor
-        -Wnull-dereference
-        -Wimplicit-fallthrough
-        -Wformat=2
-        -fcolor-diagnostics
-    )
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    target_compile_options(project_warnings INTERFACE
-        -Wall
-        -Wextra
-        -Wpedantic
-        -Wconversion
-        -Wshadow
-        -Wdouble-promotion
-        -Woverloaded-virtual
-        -Wnon-virtual-dtor
-        -Wnull-dereference
-        -Wimplicit-fallthrough=3
-        -Wformat=2
-        -fdiagnostics-color=always
-    )
-elseif(MSVC)
-    target_compile_options(project_warnings INTERFACE
-        /W4
-        /permissive-
-        /Zc:preprocessor
-        /EHsc
-    )
+find_package(spdlog REQUIRED)
+find_package(fmt REQUIRED)
+
+# 添加CLI11 - 推荐的参数解析库
+include(FetchContent)
+FetchContent_Declare(
+    cli11
+    GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
+    GIT_TAG v2.4.1
+)
+FetchContent_MakeAvailable(cli11)
+
+# 添加CLI11 - 推荐的参数解析库
+include(FetchContent)
+FetchContent_Declare(
+    cli11
+    GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
+    GIT_TAG v2.4.1
+)
+FetchContent_MakeAvailable(cli11)
+
+add_executable(${PROJECT_NAME} main.cpp init.cpp)
+
+
+
+if (CMAKE_BUILD_TYPE STREQUAL Debug)
+    add_definitions(-DDEBUG)
+else()
+    add_definitions(-DRELEASE)
 endif()
 
-if(ENABLE_WARNINGS_AS_ERRORS)
-    if(MSVC)
-        target_compile_options(project_warnings INTERFACE /WX)
-    else()
-        target_compile_options(project_warnings INTERFACE -Werror)
-    endif()
-endif()
+#set_target_properties(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/Debug)
 
-# Example executable target
-add_executable(starter_app src/main.cpp)
-
-# Require C++23 without compiler-specific extensions
-target_compile_features(starter_app PRIVATE cxx_std_23)
-set_target_properties(starter_app PROPERTIES CXX_EXTENSIONS OFF)
-
-# Apply warnings to the executable
-target_link_libraries(starter_app PRIVATE project_warnings)
-
-# Optionally enable clang-tidy if available (honors project/.clang-tidy)
-find_program(CLANG_TIDY_EXE NAMES clang-tidy-19 clang-tidy)
-if(CLANG_TIDY_EXE)
-    set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_EXE})
-endif()
+target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog fmt::fmt CLI11::CLI11)
